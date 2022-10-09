@@ -1,3 +1,4 @@
+from pickle import TRUE
 import random
 import pygame
 from pygame.locals import *
@@ -198,13 +199,18 @@ def get_shape():
     return Piece(5, 0, random.choice(shapes))
 
 
-def draw_text(surface, text, size, color):
-    font = pygame.font.SysFont("Impact", size)
-    label = font.render(text, 1, color)
-    
+# Typography
 
-    surface.blit(label, (top_left_x + play_width /2 - (label.get_width()/2), top_left_y + play_height/2 - label.get_height()/2))
+start_font = pygame.font.SysFont('arial', 50)
+instructions_font = pygame.font.SysFont('Helvetica', 25, bold=TRUE)
+game_over_font = pygame.font.SysFont('Verdana', 50)
+instructions = 'Use LEFT/RIGHT arrow keys to move horizontally.'
+instructions2 = 'DOWN to place faster. SPACEBAR to rotate.'
 
+start_game = start_font.render("Press ENTEЯ to start", True, (15, 255, 80))
+game_instructions = instructions_font.render(instructions, True, (255,255,255))
+game_instructions2 = instructions_font.render(instructions2, True, (255,255,255))
+game_over = game_over_font.render("Better Luck Next Time!", True, (238, 75, 43))
 
 def draw_grid(surface, grid):
 
@@ -247,6 +253,7 @@ def draw_next_shape(shape, surface):
 
     sx = top_left_x + play_width + 190
     sy = top_left_y + play_height/2 - 400
+
     format = shape.shape[shape.rotation % len(shape.shape)]
 
     for i, line in enumerate(format):
@@ -388,7 +395,7 @@ def main(win):  # *
         pygame.display.update()
 
         if check_lost(locked_positions):
-            draw_text(win, "Better Luck Next Time!", 80, (255,255,255))
+            win.blit(game_over, (200,350))
             pygame.display.update()
             pygame.time.delay(3500)
             run = False
@@ -400,7 +407,9 @@ def main_menu(win):  # *
     while run:
         win.fill((0,0,0))
         win.blit(start_bgrnd,(160,50))
-        draw_text(win, 'Press ENTEЯ to start', 60, (255,255,255))
+        win.blit(start_game,(300,850))
+        win.blit(game_instructions,(15,1005))
+        win.blit(game_instructions2,(15,1040))
         pygame.display.update()
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
