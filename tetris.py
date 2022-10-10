@@ -21,8 +21,8 @@ bgrnd_img = pygame.transform.scale(bgrnd_img,(width,height))
 
 # Global varriables (Play Area)
 
-play_width = 500  # meaning 300/10 = 30 width per block
-play_height = 1000  # meaning 600/20 = 20 height per block
+play_width = 500  # meaning 500/10 = 30 width per block
+play_height = 1000  # meaning 1000/20 = 20 height per block
 block_size = 50
  
 top_left_x = (width - play_width) // 2
