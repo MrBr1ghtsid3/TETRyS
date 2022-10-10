@@ -12,7 +12,7 @@ represented in order by 0 - 6
 
 """
 
-width,height = 1080,1080
+width,height = 1024,1070
 window = pygame.display.set_mode((width,height))
 
 bgrnd_img = pygame.image.load('assets/background.png')
@@ -21,9 +21,9 @@ bgrnd_img = pygame.transform.scale(bgrnd_img,(width,height))
 
 # Global varriables (Play Area)
 
-play_width = 300  # meaning 300/10 = 30 width per block
-play_height = 600  # meaning 600/20 = 20 height per block
-block_size = 30
+play_width = 500  # meaning 300/10 = 30 width per block
+play_height = 1000  # meaning 600/20 = 20 height per block
+block_size = 50
  
 top_left_x = (width - play_width) // 2
 top_left_y = height - play_height
@@ -201,7 +201,7 @@ def get_shape():
 
 # Typography
 
-start_font = pygame.font.SysFont('arial', 50)
+start_font = pygame.font.SysFont('arial', 50, bold=TRUE)
 instructions_font = pygame.font.SysFont('Helvetica', 25, bold=TRUE)
 game_over_font = pygame.font.SysFont('Verdana', 50)
 instructions = 'Use LEFT/RIGHT arrow keys to move horizontally.'
@@ -251,7 +251,7 @@ def draw_next_shape(shape, surface):
     font = pygame.font.SysFont('Impact', 30)
     label = font.render('NEXT SHAPE', 1, (255,255,255))
 
-    sx = top_left_x + play_width + 190
+    sx = top_left_x + play_width + 5
     sy = top_left_y + play_height/2 - 400
 
     format = shape.shape[shape.rotation % len(shape.shape)]
@@ -262,7 +262,7 @@ def draw_next_shape(shape, surface):
             if column == '0':
                 pygame.draw.rect(surface, shape.color, (sx + j*block_size, sy + i*block_size, block_size, block_size), 0)
 
-    surface.blit(label, (sx + 10, sy - 50))
+    surface.blit(label, (sx + 55, sy - 50))
 
 
 def update_score(nscore):
@@ -288,23 +288,23 @@ def draw_window(surface, grid, score=0, last_score = 0):
 
     pygame.font.init()
     font = pygame.font.SysFont('Impact', 50)
-    label = font.render('TETЯIS', 1, (220,20,60))
+    label = font.render('TETЯyS', 1, (153,50,204))
 
-    surface.blit(label, (top_left_x + play_width / 2 - (label.get_width() / 2), 20))
+    surface.blit(label, (top_left_x + (play_width + 130)  - (label.get_width() / 2), 1000))
 
     # current (player) score
     font = pygame.font.SysFont('Impact', 30)
     label = font.render('SCORE: ' + str(score), 1, (255,255,255))
 
-    sx = top_left_x + play_width - 705
-    sy = top_left_y + play_height/2 - 530
+    sx = top_left_x + play_width - 520
+    sy = top_left_y + play_height/2 - 700
 
     surface.blit(label, (sx + 20, sy + 160))
     # last (high) score
-    label = font.render('HIGH SCORЕ: ' + last_score, 1, (255,255,255))
+    label = font.render('HIGH SCORЕ: ' + last_score, 1, (255,255,0))
 
-    sx = top_left_x - 405
-    sy = top_left_y - 300
+    sx = top_left_x - 275
+    sy = top_left_y + 800
 
     surface.blit(label, (sx + 20, sy + 160))
 
@@ -406,10 +406,10 @@ def main_menu(win):  # *
     run = True
     while run:
         win.fill((0,0,0))
-        win.blit(start_bgrnd,(160,50))
-        win.blit(start_game,(300,850))
-        win.blit(game_instructions,(15,1005))
-        win.blit(game_instructions2,(15,1040))
+        win.blit(start_bgrnd,(25,25))
+        win.blit(start_game,(228,633))
+        win.blit(game_instructions,(15,950))
+        win.blit(game_instructions2,(15,985))
         pygame.display.update()
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
