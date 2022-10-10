@@ -203,7 +203,7 @@ def get_shape():
 
 start_font = pygame.font.SysFont('arial', 50, bold=TRUE)
 instructions_font = pygame.font.SysFont('Helvetica', 25, bold=TRUE)
-game_over_font = pygame.font.SysFont('Verdana', 50)
+game_over_font = pygame.font.SysFont('Verdana', 50, bold=TRUE)
 instructions = 'Use LEFT/RIGHT arrow keys to move horizontally.'
 instructions2 = 'DOWN to place faster. SPACEBAR to rotate.'
 
@@ -395,7 +395,7 @@ def main(win):  # *
         pygame.display.update()
 
         if check_lost(locked_positions):
-            win.blit(game_over, (200,350))
+            win.blit(game_over, (190,550))
             pygame.display.update()
             pygame.time.delay(3500)
             run = False
